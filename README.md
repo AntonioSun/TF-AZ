@@ -36,7 +36,7 @@ Don’t forget to destroy your Terraform environment with `terraform destroy` if
 
 Under `plan`:
 
-```json
+```
 computer_name  = "myvm"
     admin_username = "ubuntu"
     disable_password_authentication = true
