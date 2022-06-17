@@ -125,7 +125,8 @@ resource "azurerm_linux_virtual_machine" "myterraformvm" {
     public_key = tls_private_key.example_ssh.public_key_openssh
   }
 
-  user_data = "${base64encode("${data.template_file.linux-metadata.rendered}")}"
+  //user_data = "${base64encode("${data.template_file.cloud-init.rendered}")}"
+  custom_data = base64encode(data.template_file.cloud-init.rendered)
 
   boot_diagnostics {
     storage_account_uri = azurerm_storage_account.mystorageaccount.primary_blob_endpoint
