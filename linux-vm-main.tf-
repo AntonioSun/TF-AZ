@@ -1,0 +1,28 @@
+# Bootstrapping Script to Install JMeter
+data "template_file" "linux-metadata" {
+template = <<EOF
+sudo apt-get update;
+curl -s get.sdkman.io | bash
+source "$HOME/.sdkman/bin/sdkman-init.sh"
+
+sdk install java 11.0.15-zulu
+java -version
+
+sdk install groovy 3.0.7
+groovy -v
+
+sdk install gradle 7.0.2
+gradle -v
+
+sudo mkdir -p /opt/bin
+sudo apt-get install -y wget xutils-dev;
+wget https://dlcdn.apache.org//jmeter/binaries/apache-jmeter-5.5.tgz
+sudo tar xf apache-jmeter-5.*.tgz -C /opt
+sudo ln -vs apache-jmeter-5.5 /opt/jmeter
+sudo ln -vs -t /opt/bin /opt/jmeter/jmeter /opt/jmeter/jmeter-server /opt/jmeter/*.sh
+sudo lndir -ignorelinks /opt/bin /usr/local/bin
+ls -l /usr/local/bin
+type jmeter
+jmeter -v
+EOF
+}
